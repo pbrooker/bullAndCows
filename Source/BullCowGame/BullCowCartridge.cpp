@@ -57,7 +57,7 @@ void UBullCowCartridge::LostGame()
     PrintLine(TEXT("Press enter to try again"));
 }
 
-bool UBullCowCartridge::IsIsogram(FString Word) const
+bool UBullCowCartridge::IsIsogram(const FString& Word) const
 {
     for (int32 Index = 0; Index < Word.Len() - 1; ++Index) {
         for (int32 Compare = Index + 1; Compare < Word.Len(); ++Compare) {
@@ -69,7 +69,7 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
     return true;
 }
 
-void UBullCowCartridge::EvaluateGuess(FString Guess) const
+void UBullCowCartridge::EvaluateGuess(const FString& Guess) const
 {
     if (Guess.Len() != HiddenWord.Len())
     {
@@ -88,7 +88,7 @@ void UBullCowCartridge::EvaluateGuess(FString Guess) const
     }
 }
 
-void UBullCowCartridge::ProcessGuess(FString Guess)
+void UBullCowCartridge::ProcessGuess(const FString& Guess)
 {    
     if (Guess == HiddenWord)
     {
@@ -113,7 +113,7 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     // return
 }
 
-TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> Wordlist) const
+TArray<FString> UBullCowCartridge::GetValidWords(const TArray<FString>& Wordlist) const
 {
     TArray<FString> ValidWords;
 
