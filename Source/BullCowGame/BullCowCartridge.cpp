@@ -117,12 +117,13 @@ TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> Wordlist) const
 {
     TArray<FString> ValidWords;
 
-    for (int32 Index = 0; Index < Wordlist.Num(); Index++)
+    for (FString Word : Wordlist)
     {
-        if (Wordlist[Index].Len() >= 4 && Wordlist[Index].Len() <= 7 && IsIsogram(Wordlist[Index]))
+        if (Word.Len() >= 4 && Word.Len() <= 7 && IsIsogram(Word))
         {
-            ValidWords.Emplace(Wordlist[Index]);
+            ValidWords.Emplace(Word);
         }
     }
+    
     return ValidWords;
 }
