@@ -10,6 +10,8 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     FFileHelper::LoadFileToStringArray(Words, *WordListPath);
     
     SetUpGame();
+
+    PrintLine(TEXT("The number of possible words is %i"), Words.Num());
     PrintLine(TEXT("The hidden word is: %s"), *HiddenWord); // Debug line
 }
 
