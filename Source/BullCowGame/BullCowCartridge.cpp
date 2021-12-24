@@ -51,11 +51,11 @@ void UBullCowCartridge::LostGame()
     PrintLine(TEXT("Press enter to try again"));
 }
 
-bool UBullCowCartridge::IsIsogram(FString Word)
+bool UBullCowCartridge::IsIsogram(FString Word) const
 {
-    for (int y = 0; y < Word.Len() - 1; ++y) {
-        for (int i = y + 1; i < Word.Len(); ++i) {
-            if (Word[y] == Word[i]) {
+    for (int32 Index = 0; Index < Word.Len() - 1; ++Index) {
+        for (int32 Compare = Index + 1; Compare < Word.Len(); ++Compare) {
+            if (Word[Index] == Word[Compare]) {
                 return false;
             }
         }
@@ -63,14 +63,8 @@ bool UBullCowCartridge::IsIsogram(FString Word)
     return true;
 }
 
-void UBullCowCartridge::ProcessGuess(FString Guess)
-{    
-    if (Guess == HiddenWord)
-    {
-        WonGame();
-        return;
-    }
-
+void UBullCowCartridge::EvaluateGuess(FString Guess) const
+{
     if (Guess.Len() != HiddenWord.Len())
     {
         PrintLine(
@@ -86,6 +80,18 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         // isogram check
         PrintLine(TEXT("No repeating letters, try again"));
     }
+}
+
+void UBullCowCartridge::ProcessGuess(FString Guess)
+{    
+    if (Guess == HiddenWord)
+    {
+        WonGame();
+        return;
+    }
+
+    // Check const evaluations
+    EvaluateGuess(Guess);
 
     // check character position - return bulls & cows
 
@@ -98,6 +104,5 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         return;  
     }
 
-    
     // return
 }
